@@ -13,3 +13,5 @@ I like to dockerize any webservice so I'll try to do the same with this project:
 # Run command:
 # docker run -td --name go_api -p 8080:8080 moriorgames/go-api
 ```
+
+# Fire a build in travisCi :)
