@@ -1,12 +1,10 @@
 
 sudo: required
 
-language: golang
+language: go
 
 env:
 - IMAGE="moriorgames/go-api"
-- CONTAINER_NAME="go_api"
-- PORT="8080"
 
 services:
 - docker
@@ -14,9 +12,9 @@ services:
 before_install:
 - docker pull $IMAGE
 - docker build -t $IMAGE .
-- docker run -td --name $CONTAINER_NAME -p $PORT:$PORT $IMAGE
+- docker run -td --name go_api -p 8080:8080 $IMAGE
 
-script: docker exec -ti $CONTAINER_NAME bash -c 'go test ./tests'
+script: docker exec -ti go_api bash -c 'go test ./tests'
 
 after_success:
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
