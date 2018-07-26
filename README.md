@@ -5,7 +5,7 @@ The idea is to create a dummy project about a Restful API in Golang to get some 
 
 # Docker in place
 
-I like to dockerize any webservice so I create so I'll try to do the same with this project:
+I like to dockerize any webservice so I'll try to do the same with this project:
 
 ```
 # Build command:
