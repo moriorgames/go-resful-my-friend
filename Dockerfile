@@ -1,23 +1,25 @@
 # Build command:
 # docker build -t moriorgames/go-api .
 # Run command:
-# docker run -td --name go_api -p 8080:8080 moriorgames/go-api
+# docker run -td --name go_api -p 8090:8090 moriorgames/go-api
 FROM        golang:1.9-alpine3.8
 MAINTAINER  MoriorGames "moriorgames@gmail.com"
-
-# Add bash executio
-RUN         apk add --no-cache bash
 
 # Create Application directory
 RUN         mkdir -p /app
 COPY        . /app
 WORKDIR     /app
 
+# Install needed packages for GO
+RUN         apk update && apk upgrade && \
+            apk add --no-cache bash git \
+            && go get -u github.com/gorilla/mux \
+            && apk del git
+
+# Compile application
+RUN         go build src/main.go
+
 # Expose ports
-EXPOSE      8080
+EXPOSE      8090
 
-# Add run scripts
-ADD         docker/run.sh /run.sh
-RUN         chmod 755 /*.sh
-
-ENTRYPOINT  ["/run.sh"]
+ENTRYPOINT  ["./main"]
