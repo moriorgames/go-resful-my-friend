@@ -16,8 +16,8 @@ RUN         apk update && apk upgrade && \
             && go get -u github.com/gorilla/mux \
             && apk del git
 
-# Compile application
-RUN         go build src/main.go
+# Compile application in a single binary
+RUN         go build -o main src/*.go
 
 # Expose ports
 EXPOSE      8090
